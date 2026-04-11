@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GitOps Platform — Tejal Kadlag</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+    header { background: #1e293b; padding: 20px 40px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 20px; color: #7c3aed; font-weight: 600; }
+    header span { font-size: 13px; color: #64748b; }
+    .hero { text-align: center; padding: 60px 20px 40px; }
+    .hero h2 { font-size: 36px; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .hero p { font-size: 16px; color: #94a3b8; max-width: 500px; margin: 0 auto 30px; }
+    .status-badge { display: inline-block; background: #166534; color: #86efac; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; margin-bottom: 40px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 900px; margin: 0 auto 40px; padding: 0 20px; }
+    .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 20px; text-align: center; }
+    .card .icon { font-size: 28px; margin-bottom: 10px; }
+    .card h3 { font-size: 14px; font-weight: 600; color: #f1f5f9; margin-bottom: 6px; }
+    .card p { font-size: 12px; color: #64748b; }
+    .api-section { max-width: 600px; margin: 0 auto; padding: 0 20px 40px; }
+    .api-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #f1f5f9; }
+    .api-response { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 16px; font-family: monospace; font-size: 13px; color: #86efac; min-height: 80px; white-space: pre-wrap; }
+    button { background: #7c3aed; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-size: 14px; cursor: pointer; margin-bottom: 12px; }
+    button:hover { background: #6d28d9; }
+    footer { text-align: center; padding: 20px; font-size: 12px; color: #475569; border-top: 1px solid #1e293b; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GitOps Platform</h1>
+    <span>Built by Tejal Kadlag</span>
+  </header>
+  <div class="hero">
+    <h2>End-to-End DevOps Pipeline</h2>
+    <p>Production-grade GitOps platform with Kubernetes, ArgoCD, Prometheus, and Grafana</p>
+    <div class="status-badge">● Live on Kubernetes</div>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="icon">⚙</div><h3>GitHub Actions</h3><p>Automated CI/CD pipeline with security scanning</p></div>
+    <div class="card"><div class="icon">◎</div><h3>Kubernetes</h3><p>Container orchestration with auto-scaling</p></div>
+    <div class="card"><div class="icon">◈</div><h3>ArgoCD</h3><p>GitOps deployment — git push = auto deploy</p></div>
+    <div class="card"><div class="icon">◉</div><h3>Prometheus</h3><p>Metrics collection and alerting</p></div>
+    <div class="card"><div class="icon">▦</div><h3>Grafana</h3><p>Real-time monitoring dashboards</p></div>
+    <div class="card"><div class="icon">◧</div><h3>Terraform</h3><p>Infrastructure as Code on Azure AKS</p></div>
+  </div>
+  <div class="api-section">
+    <h3>Live API Status</h3>
+    <button onclick="checkAPI()">Check Backend API</button>
+    <div class="api-response" id="response">Click the button to check live API status...</div>
+  </div>
+  <footer>Tejal Kadlag · DevOps Engineer · GitOps Platform Project 2025</footer>
+  <script>
+    async function checkAPI() {
+      const el = document.getElementById('response');
+      el.textContent = 'Connecting to API...';
+      try {
+        const res = await fetch('http://localhost:3000/health');
+        const data = await res.json();
+        el.textContent = JSON.stringify(data, null, 2);
+      } catch(e) {
+        el.textContent = 'API running in Kubernetes — not directly accessible from browser in local mode.\nDeploy to AKS to see live response.';
+      }
+    }
+  </script>
+</body>
+</html>
